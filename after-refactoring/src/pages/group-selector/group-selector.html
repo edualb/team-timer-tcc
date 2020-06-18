@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title text-center>Group Selector</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="background-default">
+    <ion-row *ngFor="let lista of grupos">
+        <ion-col>
+        <button ion-button block outline icon-start large="true" (click)="vaiParaGroup(lista.key)">
+            <ion-icon class="ion-md-people ion-ios-people"></ion-icon>
+            {{ lista?.grupo?.titulo }}
+        </button>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="grupos.length == 0">
+        <ion-col>
+        <ion-fab center>
+            <button ion-fab (click)="adicionarGrupo()">
+            <ion-icon class="ion-md-add ion-ios-add"></ion-icon>
+            </button>
+        </ion-fab>
+        </ion-col>
+    </ion-row>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-fab id="top-zero" center *ngIf="grupos.length > 0">
+            <button ion-fab (click)="adicionarGrupo()">
+            <ion-icon class="ion-md-add ion-ios-add"></ion-icon>
+            </button>
+        </ion-fab>
+    </ion-toolbar>
+</ion-footer>
+

@@ -1,0 +1,17 @@
+page-timer-group {
+    h1 {
+        font-size: 5em;
+    }
+
+    h6.ultima-posicao {       
+        opacity: 0.5;
+        font-size: 1em;
+    }
+    h6.segunda-posicao {
+        font-size: 1.3em
+    }
+
+    .passou-tempo-sugerido {
+        color: #f53d3d;
+    }
+}

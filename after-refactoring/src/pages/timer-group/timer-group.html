@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ title }} Timer</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="background-default">
+    <ion-grid *ngIf="!endDailyMeeting">
+        <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8">
+                <h1 ion-text color="primary">
+                    {{ DMMainProvider?.hour }}:{{ DMMainProvider?.minute }}:{{ DMMainProvider?.second }}
+                </h1>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8">
+                <h2 ion-text color="pause" *ngIf="stopTimer || DMWaitingProvider?.second > 0">
+                    {{ DMWaitingProvider?.hour }}:{{ DMWaitingProvider?.minute }}:{{ DMWaitingProvider?.second }}
+                </h2>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col *ngIf="DMMemberProvider?.drawMembers[0]">
+                <h4 ion-text color="primary" [ngClass]="{'passou-tempo-sugerido': DMMemberProvider?.drawMembers[0].passouTempoSugerido}">
+                    {{ DMMemberProvider?.drawMembers[0].nome }} {{ DMMemberProvider?.hour }}:{{ DMMemberProvider?.minute }}:{{ DMMemberProvider?.second }}
+                </h4>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <h6 ion-text color="primary" class="segunda-posicao">
+                    {{ DMMemberProvider?.drawMembers[1]?.nome }}
+                </h6>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <h6 ion-text color="primary">
+                    {{ DMMemberProvider?.drawMembers[2]?.nome }}
+                </h6>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <h6 ion-text color="primary" class="ultima-posicao">
+                    {{ DMMemberProvider?.drawMembers[3]?.nome }}
+                </h6>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <page-timer-per-member [show]="endDailyMeeting" [membros]="DMSharingProvider?.share?.members"></page-timer-per-member>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+    <button ion-button icon-start full large="true" *ngIf="!endDailyMeeting"
+        (click)="nextMember()" [disabled]="stopTimer">
+            <ion-icon class="icon ion-md-timer ion-ios-timer"></ion-icon>
+            {{ firstAccessDailyMeeting? 'Start Daily Meeting' : 'Next member' }}
+    </button>
+    <button ion-button icon-start full color="secondary" *ngIf="!endDailyMeeting"
+        large="true" (click)="DMMemberProvider?.sendMemberToLast(timeLimit)" [disabled]="stopTimer || firstAccessDailyMeeting">
+            Move member to last
+    </button>
+    <button ion-button icon-start full color="pause" *ngIf="!stopTimer && !endDailyMeeting"
+        large="true" (click)="stopTimerDailyMeeting()" [disabled]="firstAccessDailyMeeting">
+            <ion-icon class="icon ion-md-pause ion-ios-pause"></ion-icon>
+            Pause timer
+    </button>
+    <button ion-button icon-start full *ngIf="stopTimer && !endDailyMeeting"
+        large="true" (click)="initTimerDailyMeeting()">
+            <ion-icon class="icon ion-md-play ion-ios-play"></ion-icon>
+            Resume timer
+    </button>
+    <page-button-shared [msg]="sharingMessage" *ngIf="endDailyMeeting"></page-button-shared>
+    </ion-toolbar>
+</ion-footer>

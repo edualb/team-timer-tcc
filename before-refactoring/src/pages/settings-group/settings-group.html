@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title *ngIf="!novoGrupo">{{ grupo?.titulo }} SETTINGS</ion-title>
+        <ion-title *ngIf="novoGrupo">NEW GROUP</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="background-default">
+    <ion-list>
+        <ion-item color="background-default">
+            <ion-label color="primary">Group name</ion-label>
+            <ion-input placeholder="Group name Input" [(ngModel)]="nomeGrupoInput"></ion-input>
+        </ion-item>
+        <br/>
+        <ion-item color="background-default">
+            <ion-label color="primary">Time per member</ion-label>
+            <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="tempoGrupo"></ion-datetime>
+        </ion-item>
+        <br/>
+        <h2 ion-text color="primary" *ngIf="novoGrupo">Members:</h2>
+        <ion-item color="background-default" class="texto" *ngFor="let membro of membros">
+                <ion-label>{{ membro?.nome }}</ion-label>
+                <button item-end ion-button icon-only clear="true" (click)="deletaMembro(membro)">
+                    <ion-icon class="icon ion-md-trash ion-ios-trash"></ion-icon>
+                </button>
+        </ion-item>
+        <br/>
+        <ion-item color="background-default" class="texto" *ngIf="novoGrupo">
+            <page-button-add-member [id]="membros.length + 1" [tempo]="tempoGrupo" (respostaMembros)="addMembro($event)"></page-button-add-member>
+        </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+    <button ion-button icon-start full large="true" *ngIf="!novoGrupo" (click)="saveGrupo()">
+        <ion-icon class="icon ion-md-checkmark ion-ios-checkmark"></ion-icon>
+        Save Settings
+    </button>
+    <button ion-button icon-start full color="danger" large="true" (click)="deletaGrupo()"
+        *ngIf="!novoGrupo">
+        <ion-icon class="icon ion-md-trash ion-ios-trash"></ion-icon>
+        Delete group
+    </button>
+    <button ion-button icon-start full large="true" 
+        *ngIf="novoGrupo" (click)="criarNovoGrupo()">
+            <ion-icon class="icon ion-md-add-circle ion-ios-add-circle"></ion-icon>
+            Create new group
+    </button>
+    </ion-toolbar>
+</ion-footer>

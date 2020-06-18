@@ -1,0 +1,11 @@
+<div *ngIf="show" >
+  <ion-grid *ngFor="let membro of membros">
+    <ion-row>
+        <ion-col>
+            <h6 ion-text color="primary">
+                {{ membro.nome }} ({{ membro.tempo }})
+            </h6>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

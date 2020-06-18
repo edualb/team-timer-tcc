@@ -1,0 +1,52 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-admob-free": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-plugin-insomnia": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-promise-polyfill": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "cordova-admob-sdk": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.prod.teamtimer"
+    }
+  }
+}

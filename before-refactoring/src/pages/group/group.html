@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+        {{ grupo?.titulo }}
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="vaiParaSettingsGroup()">
+            <ion-icon class="ion-md-settings ion-ios-settings"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="background-default">
+    <ion-row>
+        <ion-col>
+            <button ion-button full icon-start large="true" 
+                (click)="vaiParaTimer()" [disabled]="grupo?.membros.length === 0 || faltouTodosMembros">
+                <ion-icon class="icon ion-md-timer ion-ios-timer"></ion-icon>
+                START TIMER
+            </button>
+        </ion-col>
+    </ion-row>
+    <ion-list *ngIf="grupo">
+        <ion-item color="background-default" class="texto"
+            *ngFor="let membro of grupo.membros">
+                <ion-label>{{ membro?.nome }}</ion-label>
+                <ion-checkbox [(ngModel)]="membro.presenca" (click)="possuiPresencaMembros(grupo)"></ion-checkbox>
+                <button item-end ion-button icon-only clear="true" (click)="deletaMembro(membro)">
+                    <ion-icon class="icon ion-md-trash ion-ios-trash"></ion-icon>
+                </button>
+        </ion-item>
+        <br/>
+        <ion-item color="background-default" class="texto">
+            <page-button-add-member [id]="grupo.membros.length + 1" [tempo]="grupo.tempoLimite" (respostaMembros)="addMembro($event)"></page-button-add-member>
+        </ion-item>
+    </ion-list>
+</ion-content>

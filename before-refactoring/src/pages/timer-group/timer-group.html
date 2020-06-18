@@ -1,0 +1,81 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ grupo?.titulo }} Timer</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding class="background-default">
+    <ion-grid *ngIf="!fimDailyMeeting">
+        <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8">
+                <h1 ion-text color="primary">
+                    {{ hora }}:{{ minuto }}:{{ segundo }}
+                </h1>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="8">
+                <h2 ion-text color="pause" *ngIf="stopTimer || segundoSegura > 0">
+                    {{ horaSegura }}:{{ minutoSegura }}:{{ segundoSegura }}
+                </h2>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col *ngIf="membrosSorteados[0]">
+                <h4 ion-text color="primary" [ngClass]="{'passou-tempo-sugerido': membrosSorteados[0].passouTempoSugerido}">
+                    {{ membrosSorteados[0].nome }} {{ horaMembro }}:{{ minutoMembro }}:{{ segundoMembro }}
+                </h4>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <h6 ion-text color="primary" class="segunda-posicao">
+                    {{ membrosSorteados[1]?.nome }}
+                </h6>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <h6 ion-text color="primary">
+                    {{ membrosSorteados[2]?.nome }}
+                </h6>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <h6 ion-text color="primary" class="ultima-posicao">
+                    {{ membrosSorteados[3]?.nome }}
+                </h6>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <page-timer-per-member [show]="fimDailyMeeting" [membros]="tempoMembros"></page-timer-per-member>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+    <button ion-button icon-start full large="true" *ngIf="!fimDailyMeeting"
+        (click)="proximoMembro()" [disabled]="stopTimer">
+            <ion-icon class="icon ion-md-timer ion-ios-timer"></ion-icon>
+            {{ primeiroAcesso? 'Start Daily Meeting' : 'Next member' }}
+    </button>
+    <button ion-button icon-start full color="secondary" *ngIf="!fimDailyMeeting"
+        large="true" (click)="pulaMembro()" [disabled]="stopTimer || primeiroAcesso">
+            Move member to last
+    </button>
+    <button ion-button icon-start full color="pause" *ngIf="!stopTimer && !fimDailyMeeting"
+        large="true" (click)="pararContagem()" [disabled]="primeiroAcesso">
+            <ion-icon class="icon ion-md-pause ion-ios-pause"></ion-icon>
+            Pause timer
+    </button>
+    <button ion-button icon-start full *ngIf="stopTimer && !fimDailyMeeting"
+        large="true" (click)="iniciarContagem()">
+            <ion-icon class="icon ion-md-play ion-ios-play"></ion-icon>
+            Resume timer
+    </button>
+    <page-button-shared [msg]="mensagemCompartilhada" *ngIf="fimDailyMeeting"></page-button-shared>
+    </ion-toolbar>
+</ion-footer>
